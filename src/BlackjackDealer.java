@@ -24,10 +24,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
     static File f;
     static Scanner s;
     static BufferedWriter bw;
-    static ArrayList<String> fileStrings;
     BlackjackHand playerHand, dealerHand, playerHand2;
-    int playerHandVal;
-    int dealerHandVal;
     boolean playerHasSplit = false;
     boolean playerIsOnSecondHand = false;
 
@@ -50,7 +47,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
         standButton = new javax.swing.JButton();
         doubleButton = new javax.swing.JButton();
         insuranceButton = new javax.swing.JButton();
-        hintButton = new javax.swing.JButton();
+        javax.swing.JButton hintButton = new javax.swing.JButton();
         splitButton = new javax.swing.JButton();
         playerHand2Value = new javax.swing.JLabel();
         playerHand2CardsList = new javax.swing.JLabel();
@@ -59,7 +56,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
         dealerHandValue = new javax.swing.JLabel();
         dealerCardsList = new javax.swing.JLabel();
         startButton = new javax.swing.JButton();
-        c = new javax.swing.JLabel();
+        javax.swing.JLabel c = new javax.swing.JLabel();
         chipsLabel = new javax.swing.JLabel();
         betInput = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -439,11 +436,10 @@ public class BlackjackDealer extends javax.swing.JFrame{
                 betInput.setEnabled(true);
             }
         }
-        else if(playerHasSplit && !playerIsOnSecondHand)
+        else if(!playerIsOnSecondHand)
             playerIsOnSecondHand = true;
 
-        else if(playerHasSplit && playerIsOnSecondHand)
-        {
+        else {
             if(doubleButton.isEnabled())
                 doubleButton.setEnabled(false);
             hitButton.setEnabled(false);
@@ -568,7 +564,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
                 chipsLabel.setText(Integer.toString(chips));
             }
         }
-        else if(playerHasSplit && !playerIsOnSecondHand)
+        else if(!playerIsOnSecondHand)
         {
             if(doubleButton.isEnabled())
                 doubleButton.setEnabled(false);
@@ -592,8 +588,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
                 doubleButton.setEnabled(true);
             }
         }
-        else if(playerHasSplit && playerIsOnSecondHand)
-        {
+        else {
             if(doubleButton.isEnabled())
                 doubleButton.setEnabled(false);
             playerHand2.addCard(new PlayingCard());
@@ -817,8 +812,6 @@ public class BlackjackDealer extends javax.swing.JFrame{
             s = new Scanner(f);
             bw = new BufferedWriter(new FileWriter(f.getAbsoluteFile(), true));
             hs = Integer.parseInt(s.nextLine());
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(BlackjackDealer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(BlackjackDealer.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -830,12 +823,10 @@ public class BlackjackDealer extends javax.swing.JFrame{
 
     // Variables declaration - do not modify
     private javax.swing.JTextField betInput;
-    private javax.swing.JLabel c;
     private javax.swing.JLabel chipsLabel;
     private javax.swing.JLabel dealerCardsList;
     private javax.swing.JLabel dealerHandValue;
     private javax.swing.JButton doubleButton;
-    private javax.swing.JButton hintButton;
     private javax.swing.JButton hitButton;
     private javax.swing.JLabel hsLabel;
     private javax.swing.JButton insuranceButton;
