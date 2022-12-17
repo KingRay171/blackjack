@@ -1,4 +1,3 @@
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,7 +23,10 @@ public class BlackjackDealer extends javax.swing.JFrame{
     static File f;
     static Scanner s;
     static BufferedWriter bw;
+    static ArrayList<String> fileStrings;
     BlackjackHand playerHand, dealerHand, playerHand2;
+    int playerHandVal;
+    int dealerHandVal;
     boolean playerHasSplit = false;
     boolean playerIsOnSecondHand = false;
 
@@ -47,7 +49,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
         standButton = new javax.swing.JButton();
         doubleButton = new javax.swing.JButton();
         insuranceButton = new javax.swing.JButton();
-        javax.swing.JButton hintButton = new javax.swing.JButton();
+        hintButton = new javax.swing.JButton();
         splitButton = new javax.swing.JButton();
         playerHand2Value = new javax.swing.JLabel();
         playerHand2CardsList = new javax.swing.JLabel();
@@ -56,7 +58,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
         dealerHandValue = new javax.swing.JLabel();
         dealerCardsList = new javax.swing.JLabel();
         startButton = new javax.swing.JButton();
-        javax.swing.JLabel c = new javax.swing.JLabel();
+        c = new javax.swing.JLabel();
         chipsLabel = new javax.swing.JLabel();
         betInput = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -74,12 +76,15 @@ public class BlackjackDealer extends javax.swing.JFrame{
         jLabel1.setText("You");
 
         playerHand1Value.setText("Hand Value:");
+        playerHand1Value.setFont(new java.awt.Font("Segoe UI", 0, 12));
 
         playerHand1CardsList.setText("Cards:");
         playerHand1CardsList.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        playerHand1CardsList.setFont(new java.awt.Font("Segoe UI", 0, 12));
 
         hitButton.setText("Hit");
         hitButton.setEnabled(false);
+        hitButton.setFont(new java.awt.Font("Segoe UI", 0, 12));
         hitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hitButtonActionPerformed(evt);
@@ -88,6 +93,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
 
         standButton.setText("Stand");
         standButton.setEnabled(false);
+        standButton.setFont(new java.awt.Font("Segoe UI", 0, 12));
         standButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 standButtonActionPerformed(evt);
@@ -96,6 +102,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
 
         doubleButton.setText("Double");
         doubleButton.setEnabled(false);
+        doubleButton.setFont(new java.awt.Font("Segoe UI", 0, 12));
         doubleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 doubleButtonActionPerformed(evt);
@@ -104,6 +111,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
 
         insuranceButton.setText("Insurance");
         insuranceButton.setEnabled(false);
+        insuranceButton.setFont(new java.awt.Font("Segoe UI", 0, 12));
         insuranceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insuranceButtonActionPerformed(evt);
@@ -112,6 +120,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
 
         hintButton.setText("Hint");
         hintButton.setEnabled(false);
+        hintButton.setFont(new java.awt.Font("Segoe UI", 0, 12));
         hintButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hintButtonActionPerformed(evt);
@@ -120,6 +129,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
 
         splitButton.setText("Split");
         splitButton.setEnabled(false);
+        splitButton.setFont(new java.awt.Font("Segoe UI", 0, 12));
         splitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 splitButtonActionPerformed(evt);
@@ -128,10 +138,14 @@ public class BlackjackDealer extends javax.swing.JFrame{
 
         playerHand2Value.setText("Hand Value: ");
         playerHand2Value.setEnabled(false);
+        playerHand2Value.setFont(new java.awt.Font("Segoe UI", 0, 12));
 
         playerHand2CardsList.setText("Cards:");
         playerHand2CardsList.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         playerHand2CardsList.setEnabled(false);
+        playerHand2CardsList.setFont(new java.awt.Font("Segoe UI", 0, 12));
+
+        betInput.setFont(new java.awt.Font("Segoe UI", 0, 12));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -198,9 +212,11 @@ public class BlackjackDealer extends javax.swing.JFrame{
         jLabel2.setText("Computer");
 
         dealerHandValue.setText("Hand Value:");
+        dealerHandValue.setFont(new java.awt.Font("Segoe UI", 0, 12));
 
         dealerCardsList.setText("Cards:");
         dealerCardsList.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        dealerCardsList.setFont(new java.awt.Font("Segoe UI", 0, 12));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -232,6 +248,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
         );
 
         startButton.setText("Start");
+        startButton.setFont(new java.awt.Font("Segoe UI", 0, 12));
         startButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startButtonActionPerformed(evt);
@@ -241,14 +258,19 @@ public class BlackjackDealer extends javax.swing.JFrame{
         c.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         c.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         c.setText("Chips:");
+        c.setFont(new java.awt.Font("Segoe UI", 0, 12));
 
         chipsLabel.setText(String.valueOf(chips));
+        chipsLabel.setFont(new java.awt.Font("Segoe UI", 0, 12));
 
         jLabel4.setText("Bet:");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 12));
 
         hsLabel.setText(Integer.toString(hs));
+        hsLabel.setFont(new java.awt.Font("Segoe UI", 0, 12));
 
         jLabel5.setText("High Score:");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 12));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -436,10 +458,11 @@ public class BlackjackDealer extends javax.swing.JFrame{
                 betInput.setEnabled(true);
             }
         }
-        else if(!playerIsOnSecondHand)
+        else if(playerHasSplit && !playerIsOnSecondHand)
             playerIsOnSecondHand = true;
 
-        else {
+        else if(playerHasSplit && playerIsOnSecondHand)
+        {
             if(doubleButton.isEnabled())
                 doubleButton.setEnabled(false);
             hitButton.setEnabled(false);
@@ -564,7 +587,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
                 chipsLabel.setText(Integer.toString(chips));
             }
         }
-        else if(!playerIsOnSecondHand)
+        else if(playerHasSplit && !playerIsOnSecondHand)
         {
             if(doubleButton.isEnabled())
                 doubleButton.setEnabled(false);
@@ -588,7 +611,8 @@ public class BlackjackDealer extends javax.swing.JFrame{
                 doubleButton.setEnabled(true);
             }
         }
-        else {
+        else if(playerHasSplit && playerIsOnSecondHand)
+        {
             if(doubleButton.isEnabled())
                 doubleButton.setEnabled(false);
             playerHand2.addCard(new PlayingCard());
@@ -812,6 +836,8 @@ public class BlackjackDealer extends javax.swing.JFrame{
             s = new Scanner(f);
             bw = new BufferedWriter(new FileWriter(f.getAbsoluteFile(), true));
             hs = Integer.parseInt(s.nextLine());
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(BlackjackDealer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(BlackjackDealer.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -823,10 +849,12 @@ public class BlackjackDealer extends javax.swing.JFrame{
 
     // Variables declaration - do not modify
     private javax.swing.JTextField betInput;
+    private javax.swing.JLabel c;
     private javax.swing.JLabel chipsLabel;
     private javax.swing.JLabel dealerCardsList;
     private javax.swing.JLabel dealerHandValue;
     private javax.swing.JButton doubleButton;
+    private javax.swing.JButton hintButton;
     private javax.swing.JButton hitButton;
     private javax.swing.JLabel hsLabel;
     private javax.swing.JButton insuranceButton;
@@ -845,7 +873,3 @@ public class BlackjackDealer extends javax.swing.JFrame{
     private javax.swing.JButton startButton;
     // End of variables declaration
 }
-
-
-
-
