@@ -939,6 +939,10 @@ public class BlackjackDealer extends javax.swing.JFrame{
                     bw = new BufferedWriter(new FileWriter(f.getAbsoluteFile(), true));
                     hs = Integer.parseInt(s.nextLine());
                 }
+            } else {
+                s = new Scanner(f);
+                bw = new BufferedWriter(new FileWriter(f.getAbsoluteFile(), true));
+                hs = Integer.parseInt(s.nextLine());
             }
 
         } catch (IOException ex) {
