@@ -585,9 +585,9 @@ public class BlackjackDealer extends javax.swing.JFrame{
             }
             else if(playerHand.handValue() == 21)
             {
-                JOptionPane.showMessageDialog(this, "You got a blackjack!", "That's game", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "You win!", "That's game", JOptionPane.ERROR_MESSAGE);
                 playerIsOnSecondHand = true;
-                chips += Integer.parseInt(betInput.getText()) * 2.5;
+                chips += Integer.parseInt(betInput.getText()) * 2;
                 updateHighScore();
                 chipsLabel.setText(Integer.toString(chips));
                 doubleButton.setEnabled(true);
@@ -661,9 +661,9 @@ public class BlackjackDealer extends javax.swing.JFrame{
             }
             else if(playerHand2.handValue() == 21)
             {
-                JOptionPane.showMessageDialog(this, "You got a blackjack!", "That's game", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "You got a 21!", "That's game", JOptionPane.ERROR_MESSAGE);
                 playerIsOnSecondHand = false;
-                chips += Integer.parseInt(betInput.getText()) * 2.5;
+                chips += Integer.parseInt(betInput.getText()) * 2;
                 updateHighScore();
                 chipsLabel.setText(Integer.toString(chips));
                 doubleButton.setEnabled(true);
@@ -690,10 +690,10 @@ public class BlackjackDealer extends javax.swing.JFrame{
             playerHand1Value.setText("Hand Value: " + playerHand.handValue());
             playerHand1CardsList.setText("<html><body>" + playerHand + "</body></html>");
             if (playerHand.handValue() > 21) {
-                JOptionPane.showMessageDialog(this, "You bust!", "That's game", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "You bust!", "You lost", JOptionPane.ERROR_MESSAGE);
             } else if (playerHand.handValue == 21) {
-                JOptionPane.showMessageDialog(this, "You got a blackjack!", "That's game", JOptionPane.ERROR_MESSAGE);
-                chips += Integer.parseInt(betInput.getText()) * 5;
+                JOptionPane.showMessageDialog(this, "You got a 21!", "You win", JOptionPane.ERROR_MESSAGE);
+                chips += Integer.parseInt(betInput.getText()) * 4;
                 updateHighScore();
                 chipsLabel.setText(Integer.toString(chips));
             } else {
@@ -702,7 +702,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
                     dealerHandValue.setText("Hand Value: " + dealerHand.handValue());
                     dealerCardsList.setText("<html><body>" + dealerHand + "</body></html>");
                     if (dealerHand.handValue() > 21) {
-                        JOptionPane.showMessageDialog(this, "Dealer bust!", "That's game", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Dealer bust!", "You win.", JOptionPane.ERROR_MESSAGE);
                         startButton.setEnabled(true);
                         chips += Integer.parseInt(betInput.getText()) * 4;
                         updateHighScore();
@@ -711,14 +711,14 @@ public class BlackjackDealer extends javax.swing.JFrame{
                 }
 
                 if (dealerHand.handValue() > playerHand.handValue() && dealerHand.handValue() < 22) {
-                    JOptionPane.showMessageDialog(this, "You lose", "That's game", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "You lose", "Game over", JOptionPane.ERROR_MESSAGE);
                 } else if (dealerHand.handValue() < playerHand.handValue()) {
-                    JOptionPane.showMessageDialog(this, "You win", "That's game", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "You win", "Game over", JOptionPane.ERROR_MESSAGE);
                     chips += Integer.parseInt(betInput.getText()) * 4;
                     updateHighScore();
                     chipsLabel.setText(Integer.toString(chips));
                 } else if (dealerHand.handValue() == playerHand.handValue()) {
-                    JOptionPane.showMessageDialog(this, "Draw", "That's game", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Draw", "Game over", JOptionPane.ERROR_MESSAGE);
                     chips += Integer.parseInt(betInput.getText()) * 2;
                     chipsLabel.setText(Integer.toString(chips));
                 }
@@ -732,8 +732,8 @@ public class BlackjackDealer extends javax.swing.JFrame{
                 if (playerHand.handValue() > 21) {
                     JOptionPane.showMessageDialog(this, "You bust!", "Hand lost", JOptionPane.ERROR_MESSAGE);
                 } else if (playerHand.handValue == 21) {
-                    JOptionPane.showMessageDialog(this, "You got a blackjack!", "Hand lost", JOptionPane.ERROR_MESSAGE);
-                    chips += Integer.parseInt(betInput.getText()) * 5;
+                    JOptionPane.showMessageDialog(this, "You got a 21!", "Hand won", JOptionPane.ERROR_MESSAGE);
+                    chips += Integer.parseInt(betInput.getText()) * 4;
                     updateHighScore();
                     chipsLabel.setText(Integer.toString(chips));
                 }
@@ -752,7 +752,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
                     dealerCardsList.setText("<html><body>" + dealerHand + "</body></html>");
                     if(dealerHand.handValue() > 21)
                     {
-                        JOptionPane.showMessageDialog(this, "Dealer bust!", "That's game", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Dealer bust!", "You win", JOptionPane.ERROR_MESSAGE);
                         startButton.setEnabled(true);
                         chips += Integer.parseInt(betInput.getText()) * 2;
                         updateHighScore();
@@ -770,18 +770,18 @@ public class BlackjackDealer extends javax.swing.JFrame{
                 }
                 if(playerHand.handValue() != 21) {
                     if (dealerHand.handValue() > playerHand.handValue() && dealerHand.handValue() < 22) {
-                        JOptionPane.showMessageDialog(this, "Hand 1 lost", "That's game", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Hand 1 lost", "Information", JOptionPane.ERROR_MESSAGE);
                         startButton.setEnabled(true);
                         betInput.setEnabled(true);
                     } else if (dealerHand.handValue() < playerHand.handValue() && playerHand.handValue() < 22) {
-                        JOptionPane.showMessageDialog(this, "Hand 1 won", "That's game", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Hand 1 won", "Information", JOptionPane.ERROR_MESSAGE);
                         chips += Integer.parseInt(betInput.getText()) * 2;
                         updateHighScore();
                         chipsLabel.setText(Integer.toString(chips));
                         startButton.setEnabled(true);
                         betInput.setEnabled(true);
                     } else if (dealerHand.handValue() == playerHand.handValue()) {
-                        JOptionPane.showMessageDialog(this, "Hand 1 drew", "That's game", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Hand 1 drew", "Information", JOptionPane.ERROR_MESSAGE);
                         chips += Integer.parseInt(betInput.getText());
                         chipsLabel.setText(Integer.toString(chips));
                         startButton.setEnabled(true);
@@ -791,7 +791,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
 
                 if(playerHand2.handValue() != 21) {
                     if (dealerHand.handValue() > playerHand2.handValue() && dealerHand.handValue() < 22) {
-                        JOptionPane.showMessageDialog(this, "Hand 2 lost", "That's game", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Hand 2 lost", "Game over", JOptionPane.ERROR_MESSAGE);
                         startButton.setEnabled(true);
                         betInput.setEnabled(true);
                         playerHasSplit = false;
@@ -801,7 +801,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
                         playerHand2CardsList.setText("Cards: ");
                         playerHand2CardsList.setEnabled(false);
                     } else if (dealerHand.handValue() < playerHand2.handValue()) {
-                        JOptionPane.showMessageDialog(this, "Hand 2 won", "That's game", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Hand 2 won", "Game over", JOptionPane.ERROR_MESSAGE);
                         chips += Integer.parseInt(betInput.getText()) * 2;
                         updateHighScore();
                         chipsLabel.setText(Integer.toString(chips));
@@ -814,7 +814,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
                         playerHand2CardsList.setText("Cards: ");
                         playerHand2CardsList.setEnabled(false);
                     } else if (dealerHand.handValue() == playerHand2.handValue()) {
-                        JOptionPane.showMessageDialog(this, "Hand 2 drew", "That's game", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Hand 2 drew", "Game over", JOptionPane.ERROR_MESSAGE);
                         chips += Integer.parseInt(betInput.getText());
                         chipsLabel.setText(Integer.toString(chips));
                         startButton.setEnabled(true);
@@ -828,8 +828,8 @@ public class BlackjackDealer extends javax.swing.JFrame{
                     }
                 }
                 else {
-                    JOptionPane.showMessageDialog(this, "You got a blackjack!", "That's game", JOptionPane.ERROR_MESSAGE);
-                    chips += Integer.parseInt(betInput.getText()) * 5;
+                    JOptionPane.showMessageDialog(this, "You got a 21!", "Game over", JOptionPane.ERROR_MESSAGE);
+                    chips += Integer.parseInt(betInput.getText()) * 4;
                     updateHighScore();
                     chipsLabel.setText(Integer.toString(chips));
                     hitButton.setEnabled(false);
@@ -868,7 +868,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
         insuranceButton.setEnabled(false);
         if(dealerHand.handValue() == 21)
         {
-            JOptionPane.showMessageDialog(this, "Insurance paid off", "That's game", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Insurance paid off", "Game over", JOptionPane.ERROR_MESSAGE);
             chips += Integer.parseInt(betInput.getText()) * 1.5;
             chipsLabel.setText(Integer.toString(chips));
             startButton.setEnabled(true);
