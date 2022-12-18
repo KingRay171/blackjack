@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
 
 /**
  *
@@ -26,13 +27,13 @@ public class BlackjackDealer extends javax.swing.JFrame{
     boolean playerHasSplit = false;
     boolean playerIsOnSecondHand = false;
 
-    public BlackjackDealer() {
-        initComponents();
+    public BlackjackDealer(String username) {
+        initComponents(username);
     }
 
 
 
-    private void initComponents() {
+    private void initComponents(String username) {
 
         javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
@@ -68,7 +69,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(largeFont); // NOI18N
-        jLabel1.setText("You");
+        jLabel1.setText(username);
 
         playerHand1Value.setText("Hand Value:");
         playerHand1Value.setFont(smallFont);
@@ -916,11 +917,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
+        // set Windows L&F
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -928,16 +925,16 @@ public class BlackjackDealer extends javax.swing.JFrame{
                     break;
                 }
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                 javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(BlackjackDealer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        //</editor-fold>
+
         try {
             f = new File("highscore.txt");
             if (!f.exists()) {
-                if(f.createNewFile()){
+                if (f.createNewFile()) {
                     s = new Scanner(f);
                     bw = new BufferedWriter(new FileWriter(f.getAbsoluteFile(), true));
                     hs = Integer.parseInt(s.nextLine());
@@ -951,11 +948,20 @@ public class BlackjackDealer extends javax.swing.JFrame{
         } catch (IOException ex) {
             Logger.getLogger(BlackjackDealer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new BlackjackDealer().setVisible(true));
+
+        UIManager.put("TextField.font",
+                new FontUIResource(new Font("SansSerif",Font.BOLD,16)));
+
+        String name = JOptionPane.showInputDialog("Enter your name (no more than 20 characters)");
+        while (name.length() > 21) {
+            JOptionPane.showMessageDialog(null, "Invalid name");
+            name = JOptionPane.showInputDialog("Enter your name (no more than 20 characters)");
+        }
+
+        String finalName = name;
+        java.awt.EventQueue.invokeLater(() -> new BlackjackDealer(finalName).setVisible(true));
     }
 
-    // Variables declaration - do not modify
     private javax.swing.JTextField betInput;
     private javax.swing.JLabel chipsLabel;
     private javax.swing.JLabel dealerCardsList;
@@ -971,5 +977,4 @@ public class BlackjackDealer extends javax.swing.JFrame{
     private javax.swing.JButton splitButton;
     private javax.swing.JButton standButton;
     private javax.swing.JButton startButton;
-    // End of variables declaration
 }
