@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v0.1.2
+------
+rules button works now
+
 v0.1.1
 ------
 implemented name feature, implemented hint button
