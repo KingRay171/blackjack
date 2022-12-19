@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -44,6 +45,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
         doubleButton = new javax.swing.JButton();
         insuranceButton = new javax.swing.JButton();
         javax.swing.JButton hintButton = new javax.swing.JButton();
+        javax.swing.JButton rulesButton = new javax.swing.JButton();
         splitButton = new javax.swing.JButton();
         playerHand2Value = new javax.swing.JLabel();
         playerHand2CardsList = new javax.swing.JLabel();
@@ -103,6 +105,11 @@ public class BlackjackDealer extends javax.swing.JFrame{
         hintButton.setFont(smallFont);
         hintButton.addActionListener(this::hintButtonActionPerformed);
 
+        rulesButton.setText("Rules");
+        rulesButton.setEnabled(true);
+        rulesButton.setFont(smallFont);
+        rulesButton.addActionListener(this::rulesButtonActionPerformed);
+
         splitButton.setText("Split");
         splitButton.setEnabled(false);
         splitButton.setFont(smallFont);
@@ -134,6 +141,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
                                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                                 .addComponent(splitButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                                 .addComponent(hintButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(rulesButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                                 .addComponent(hitButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                                 .addComponent(standButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                                 .addComponent(doubleButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -173,9 +181,12 @@ public class BlackjackDealer extends javax.swing.JFrame{
                                 .addComponent(insuranceButton)
                                 .addGap(18, 18, 18)
                                 .addComponent(splitButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addComponent(hintButton)
-                                .addGap(13, 13, 13))
+                                .addGap(18, 18, 18)
+                                .addComponent(rulesButton)
+                                .addGap(18, 18, 18))
+
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -304,6 +315,8 @@ public class BlackjackDealer extends javax.swing.JFrame{
 
         pack();
     }// </editor-fold>
+
+
 
     private void updateHighScore()
     {
@@ -557,12 +570,12 @@ public class BlackjackDealer extends javax.swing.JFrame{
             }
             else if(playerHand.handValue() == 21)
             {
-                JOptionPane.showMessageDialog(this, "You got a blackjack!", "That's game", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "You got a 21", "You win", JOptionPane.ERROR_MESSAGE);
                 hitButton.setEnabled(false);
                 standButton.setEnabled(false);
                 startButton.setEnabled(true);
                 betInput.setEnabled(true);
-                chips += Integer.parseInt(betInput.getText()) * 2.5;
+                chips += Integer.parseInt(betInput.getText()) * 2;
                 updateHighScore();
                 chipsLabel.setText(Integer.toString(chips));
             }
@@ -577,13 +590,13 @@ public class BlackjackDealer extends javax.swing.JFrame{
             playerHand1CardsList.setText("<html><body>" + playerHand + "</body></html>");
             if(playerHand.handValue() > 21)
             {
-                JOptionPane.showMessageDialog(this, "First hand busted!", "That's game", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "First hand busted!", "Game over", JOptionPane.ERROR_MESSAGE);
                 playerIsOnSecondHand = true;
                 doubleButton.setEnabled(true);
             }
             else if(playerHand.handValue() == 21)
             {
-                JOptionPane.showMessageDialog(this, "You win!", "That's game", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "You win!", "Game over", JOptionPane.ERROR_MESSAGE);
                 playerIsOnSecondHand = true;
                 chips += Integer.parseInt(betInput.getText()) * 2;
                 updateHighScore();
@@ -894,6 +907,26 @@ public class BlackjackDealer extends javax.swing.JFrame{
         });
     }
 
+    private void rulesButtonActionPerformed(ActionEvent evt) {
+        StringBuilder sb;
+        sb = new StringBuilder();
+        sb.append("Blackjack is a game in which the object is to get as close to 21 as possible without going over");
+        sb.append("\n (also known as busting). To hit means to take another random card from the pile. To stand");
+        sb.append("\n means to end your turn and allow the dealer to take random cards until he stands or busts.");
+        sb.append("\n Doubling down is an option that allows the player to double their bet (if they can)");
+        sb.append("\n and take one more random card. The player's turn then ends and the dealer can take cards");
+        sb.append("\n until they stand or bust. Splitting is an option that is only available when the player");
+        sb.append("\n has just received a new hand and has two of the same card. It allows the user to split");
+        sb.append("\n their hand into two hands, put down the amount they bet again on the new second hand, ");
+        sb.append("\n and play both hands independently. The hands are completely separate, one can win");
+        sb.append("\n and the other can lose, or both can win/lose. Insurance refers to an option that is");
+        sb.append("\n only available when the dealer has an Ace. It is a side bet which costs an additional");
+        sb.append("\n amount of tokens equal to half your bet and pays 2:1 if the dealer's next card is worth");
+        sb.append("\n 10. Use the Hint button to find out what the best move is for your position (it is never");
+        sb.append("\n insurance) and the Rules button to refer back to me. Good luck!");
+        JOptionPane.showMessageDialog(this, sb.toString());
+    }
+
     private void splitButtonActionPerformed(java.awt.event.ActionEvent evt) {
         playerHand2 = new BlackjackHand();
         PlayingCard c1 = playerHand.nthCard(0);
@@ -913,9 +946,7 @@ public class BlackjackDealer extends javax.swing.JFrame{
         chipsLabel.setText(Integer.toString(chips));
     }
 
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String[] args) {
         // set Windows L&F
         try {
